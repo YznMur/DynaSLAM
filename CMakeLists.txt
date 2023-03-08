@@ -71,7 +71,7 @@ if(Boost_FOUND)
     message("Found Libraries: " ${Boost_LIBRARIES})
 endif()
 
-find_package(Eigen3 3.3.8 REQUIRED)
+find_package(Eigen3  REQUIRED)
 find_package(Pangolin REQUIRED)
 
 set(PYTHON_INCLUDE_DIRS ${PYTHON_INCLUDE_DIRS} /usr/local/lib/python2.7/dist-packages/numpy/core/include/numpy)
