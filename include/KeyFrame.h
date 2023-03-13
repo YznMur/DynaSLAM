@@ -9,6 +9,12 @@
 
 #ifndef KEYFRAME_H
 #define KEYFRAME_H
+#include <stddef.h>
+#include <opencv2/core.hpp>
+#include <mutex>
+#include <map>
+#include <set>
+#include <vector>
 
 #include "MapPoint.h"
 #include "Thirdparty/DBoW2/DBoW2/BowVector.h"
@@ -18,7 +24,6 @@
 #include "Frame.h"
 #include "KeyFrameDatabase.h"
 
-#include <mutex>
 
 
 namespace ORB_SLAM2

@@ -20,6 +20,16 @@
 
 #ifndef LOOPCLOSING_H
 #define LOOPCLOSING_H
+#include <opencv2/core.hpp>
+#include <thread>
+#include <mutex>
+#include <Eigen/Core>
+#include <functional>
+#include <list>
+#include <map>
+#include <set>
+#include <utility>
+#include <vector>
 
 #include "KeyFrame.h"
 #include "LocalMapping.h"
@@ -29,9 +39,8 @@
 
 #include "KeyFrameDatabase.h"
 
-#include <thread>
-#include <mutex>
 #include "Thirdparty/g2o/g2o/types/types_seven_dof_expmap.h"
+#include "Thirdparty/g2o/g2o/types/sim3.h"
 
 namespace ORB_SLAM2
 {
@@ -39,6 +48,9 @@ namespace ORB_SLAM2
 class Tracking;
 class LocalMapping;
 class KeyFrameDatabase;
+class KeyFrame;
+class Map;
+class MapPoint;
 
 
 class LoopClosing
@@ -47,7 +59,7 @@ public:
 
     typedef pair<set<KeyFrame*>,int> ConsistentGroup;    
     typedef map<KeyFrame*,g2o::Sim3,std::less<KeyFrame*>,
-        Eigen::aligned_allocator<std::pair<const KeyFrame*, g2o::Sim3> > > KeyFrameAndPose;
+        Eigen::aligned_allocator<std::pair<KeyFrame* const, g2o::Sim3> > > KeyFrameAndPose;
 
 public:
 

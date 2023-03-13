@@ -6,9 +6,18 @@
 * For more information see <https://github.com/bertabescos/DynaSLAM>.
 *
 */
+#include "Viewer.h"   // IWYU pragma: associated
 
-#include "Viewer.h"
 #include <pangolin/pangolin.h>
+#include <unistd.h>
+#include <GL/glew.h>
+#include <opencv2/core.hpp>
+#include <opencv2/highgui.hpp>
+#include <mutex>
+
+#include "FrameDrawer.h"
+#include "MapDrawer.h"
+#include "System.h"
 #include <unistd.h>
 #include <mutex>
 
