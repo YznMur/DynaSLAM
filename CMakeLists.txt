@@ -33,7 +33,7 @@ endif()
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
 message("PROJECT_SOURCE_DIR: " ${OpenCV_DIR})
-find_package(OpenCV 3.4 QUIET)
+find_package(OpenCV 3.3 QUIET)
 if(NOT OpenCV_FOUND)
     message("OpenCV > 3.4.14 not found.")
     find_package(OpenCV 3.0 QUIET)
