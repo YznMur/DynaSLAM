@@ -124,7 +124,7 @@ src/MaskNet.cc
 src/Geometry.cc
 )
 
-link_directories(${PROJECT_SOURCE_DIR}/ddrnet_trt/build/)
+link_directories(${PROJECT_SOURCE_DIR}/ddrnet_trt/)
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
@@ -134,7 +134,7 @@ ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 /usr/lib/x86_64-linux-gnu/libpython2.7.so
 ${Boost_LIBRARIES}
-${PROJECT_SOURCE_DIR}/ddrnet_trt/build/libddrnet.so
+${PROJECT_SOURCE_DIR}/ddrnet_trt/libddrnet.so
 )
 
 
