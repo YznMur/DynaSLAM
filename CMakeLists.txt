@@ -36,6 +36,8 @@ LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
 message("PROJECT_SOURCE_DIR: " ${OpenCV_DIR})
 find_package(OpenCV 3.3 QUIET)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
 if(NOT OpenCV_FOUND)
     message("OpenCV > 3.4.14 not found.")
     find_package(OpenCV 3.0 QUIET)
@@ -43,6 +45,10 @@ if(NOT OpenCV_FOUND)
         message(FATAL_ERROR "OpenCV > 3.0 not found.")
     endif()
 endif()
+
+# find_package(OpenCV 3.3 REQUIRED)
+# include_directories(${OpenCV_INCLUDE_DIRS})
+
 
 #find_package(OpenCV 3.0 QUIET)
 #if(NOT OpenCV_FOUND)
@@ -83,6 +89,7 @@ set(PYTHON_INCLUDE_DIRS ${PYTHON_INCLUDE_DIRS} /usr/local/lib/python2.7/dist-pac
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
+/usr/local/lib/python2.7/dist-packages/numpy/core/include/numpy
 ${EIGEN3_INCLUDE_DIR}
 ${Pangolin_INCLUDE_DIRS}
 /usr/include/python2.7/
@@ -117,6 +124,8 @@ src/MaskNet.cc
 src/Geometry.cc
 )
 
+link_directories(${PROJECT_SOURCE_DIR}/ddrnet_trt/build/)
+
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
@@ -125,7 +134,10 @@ ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 /usr/lib/x86_64-linux-gnu/libpython2.7.so
 ${Boost_LIBRARIES}
+${PROJECT_SOURCE_DIR}/ddrnet_trt/build/libddrnet.so
 )
+
+
 
 # Build examples
 
@@ -139,7 +151,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Stereo)
 
 add_executable(stereo_kitti
 Examples/Stereo/stereo_kitti.cc)
-target_link_libraries(stereo_kitti ${PROJECT_NAME})
+target_link_libraries(stereo_kitti ${PROJECT_NAME} )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Examples/Monocular)
 
@@ -150,8 +162,4 @@ target_link_libraries(mono_tum ${PROJECT_NAME})
 add_executable(mono_kitti
 Examples/Monocular/mono_kitti.cc)
 target_link_libraries(mono_kitti ${PROJECT_NAME})
-
-# add_executable(mono_carla
-# Examples/Monocular/mono_carla.cc)
-# target_link_libraries(mono_carla ${PROJECT_NAME})
 
